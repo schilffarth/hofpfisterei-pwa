@@ -1,0 +1,37 @@
+#burger-menu .burger-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    width: min-content;
+}
+
+#burger-menu .link-list {
+    padding-right: 5rem;
+}
+
+#burger-menu .burger-menu > div {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#burger-menu .footer-bottom {
+    margin-top: auto;
+}
+
+#burger-menu .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#burger-menu .footer-links a {
+    margin: 0 8px;
+    white-space: nowrap;
+}
+
+#burger-menu .copyright {
+    padding: 8px;
+}

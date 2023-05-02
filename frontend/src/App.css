@@ -1,0 +1,23 @@
+#app {
+    max-width: 100%;
+}
+
+#app-container {
+    margin: 0 auto;
+}
+
+form.app-form > * {
+    margin-top: 1rem;
+}
+
+#app .page {
+    max-width: 600px;
+    padding: 20px;
+    margin: 3rem auto;
+}
+
+#app .page .landing-page {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+}

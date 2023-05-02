@@ -1,0 +1,85 @@
+### Register a new user
+POST http://localhost:3001/api/user/register
+Content-Type: application/json
+
+{
+  "username": "durmoth2",
+  "email": "roland.schilffarth@gmail.com",
+  "password": "testpassword"
+}
+
+### Activate user account
+POST http://localhost:3001/api/user/activate-account
+Content-Type: application/json
+
+{
+  "activationCode": "MhSeEx"
+}
+
+### Login user
+POST http://localhost:3001/api/user/login
+Content-Type: application/json
+
+{
+  "email": "roland.schilffarth@gmail.com",
+  "password": "newpassword"
+}
+
+### Refresh token
+POST http://localhost:3001/api/user/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjAyMTM2YmFlZmEyZmM4NmVmYjc5YSIsImVtYWlsIjoicm9sYW5kLnNjaGlsZmZhcnRoQGdtYWlsLmNvbSIsImlhdCI6MTY3OTgyODA4NCwiZXhwIjoxNjc5ODI4Mzg0fQ.sM9sKSoJR4gKPA0w9cED6QFOQPS2yiu4DtwTHqhGwTs"
+}
+
+### Logout user
+POST http://localhost:3001/api/user/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjAyMTM2YmFlZmEyZmM4NmVmYjc5YSIsImVtYWlsIjoicm9sYW5kLnNjaGlsZmZhcnRoQGdtYWlsLmNvbSIsImlhdCI6MTY3OTgyNzQwMiwiZXhwIjoxNjc5ODI3NDYyfQ.Zng1XcVUcgg0gfSjbj7R5AAqChVcieR2qn61zWUs5zk
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjAyMTM2YmFlZmEyZmM4NmVmYjc5YSIsImVtYWlsIjoicm9sYW5kLnNjaGlsZmZhcnRoQGdtYWlsLmNvbSIsImlhdCI6MTY3OTgyNzQxOCwiZXhwIjoxNjc5ODI3NDc4fQ.tGvYRdkrrFmkmGrNAAML50z0oMQwoQI7T88RIw0pba8"
+}
+
+### Request password reset
+POST http://localhost:3001/api/user/request-password-reset
+Content-Type: application/json
+
+{
+  "email": "roland.schilffarth@gmail.com"
+}
+
+### Reset password
+POST http://localhost:3001/api/user/reset-password
+Content-Type: application/json
+
+{
+  "email": "roland.schilffarth@gmail.com",
+  "resetPasswordCode": "Mq12p0",
+  "newPassword": "newpassword"
+}
+
+### Get user information
+GET http://localhost:3001/api/user/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjAyMTM2YmFlZmEyZmM4NmVmYjc5YSIsImVtYWlsIjoicm9sYW5kLnNjaGlsZmZhcnRoQGdtYWlsLmNvbSIsImlhdCI6MTY3OTgyODE4NSwiZXhwIjoxNjc5ODI4MjQ1fQ.FMdRZHASVOysdwu9ebUrgxxBOKY2BPN0cDcAMbxoYCA
+
+### Enable 2FA
+POST http://localhost:3001/api/user/enable-2fa
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjAyMTM2YmFlZmEyZmM4NmVmYjc5YSIsImVtYWlsIjoicm9sYW5kLnNjaGlsZmZhcnRoQGdtYWlsLmNvbSIsImlhdCI6MTY3OTgyODI4NywiZXhwIjoxNjc5ODI4MzQ3fQ.JTMfiqZL95Tt2ZyMS7kxMNtI7WDP3f5lA-agwPtMF20
+
+### Disable 2FA
+POST http://localhost:3001/api/user/disable-2fa
+Content-Type: application/json
+Authorization: Bearer {accessToken}
+
+### Verify 2FA Code
+POST http://localhost:3001/api/user/verify-2fa-code
+Content-Type: application/json
+
+{
+  "tempToken": "{tempToken}",
+  "securityCode": "{securityCode}"
+}

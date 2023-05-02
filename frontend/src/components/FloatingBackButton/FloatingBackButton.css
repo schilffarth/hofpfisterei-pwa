@@ -1,0 +1,6 @@
+#floating-back-button {
+    position: fixed;
+    top: 4rem;
+    left: 1rem;
+    z-index: 1300; /* No higher or Modals won't override */
+}

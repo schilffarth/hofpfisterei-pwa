@@ -1,0 +1,14 @@
+#top-navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#top-navbar div {
+    /*max-width: 600px;*/
+}
+
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+}
