@@ -12,13 +12,9 @@ import WayOfTheBread from "./pages/cms/WayOfTheBreadPage.jsx";
 // Lazy-loaded routes
 const LandingPage = lazy(() => import("./pages/LandingPage.jsx"));
 const StoresPage = lazy(() => import("./pages/StoresPage.jsx"));
-const StoresOverviewPage = lazy(() => import("./pages/StoresOverviewPage.jsx"));
-const StorePage = lazy(() => import("./pages/StorePage.jsx"));
-const StoreOverviewPage = lazy(() => import("./pages/StoreOverviewPage.jsx"));
-const AssortmentPage = lazy(() => import("./pages/AssortmentPage.jsx"));
 const PreorderPage = lazy(() => import("./pages/PreorderPage.jsx"));
+const PreorderCheckoutPage = lazy(() => import("./pages/PreorderCheckoutPage.jsx"));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 
 const AdminPage = lazy(() => import("./pages/admin/AdminPage.jsx"));
 const AdminDashboardPage = lazy(() => import("./pages/admin/AdminDashboardPage.jsx"));
@@ -35,15 +31,9 @@ const AppRoutes = () => {
                         <Routes>
                             <Route index element={<LandingPage />} />
                             <Route path="/home" element={<LandingPage />} />
-                            <Route path="/stores" element={<StoresPage />}>
-                                <Route index element={<StoresOverviewPage />} />
-                                <Route path=":store" element={<StorePage />}>
-                                    <Route index element={<StoreOverviewPage />} />
-                                    <Route path="assortment" element={<AssortmentPage />} />
-                                </Route>
-                            </Route>
-                            <Route path="/products" element={<ProductsPage />} />
                             <Route path="/preorder" element={<PreorderPage />} />
+                            <Route path="/preorder-checkout" element={<PreorderCheckoutPage />} />
+                            <Route path="/stores" element={<StoresPage />} />
                             <Route path="*" element={<NotFoundPage />} />
 
                             {/* CMS */}

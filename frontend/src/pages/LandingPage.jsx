@@ -179,9 +179,9 @@ const StoreSection = () => {
                 <Button
                     fullWidth
                     variant="contained"
-                    startIcon={<LocationOnIcon sx={{ color: 'inherit' }}/>}
-                    endIcon={<EastIcon sx={{ color: 'inherit' }}/>}
-                    onClick={() => navigate("/way-of-the-bread")}
+                    startIcon={<LocationOnIcon color="inherit" />}
+                    endIcon={<EastIcon color="inherit"  />}
+                    onClick={() => navigate("/stores")}
                     sx={{
                         minWidth: '300px',
                         maxWidth: '600px',
@@ -194,7 +194,7 @@ const StoreSection = () => {
                 >
                     <Typography
                         variant="overline"
-                        color={"inherit"}
+                        color="inherit"
                     >
                         Meine Filiale
                     </Typography>

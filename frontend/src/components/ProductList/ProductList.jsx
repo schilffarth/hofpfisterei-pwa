@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import {
     Box,
     Card,
@@ -8,14 +9,29 @@ import {
     IconButton,
     Collapse,
     CardMedia,
-} from '@mui/material';
+    Menu,
+    MenuItem,
+    ListItemIcon,
+    ListItemText, TextField,
+} from "@mui/material";
 import {
     ExpandMore as ExpandMoreIcon,
     ExpandLess as ExpandLessIcon,
     AddShoppingCart as AddShoppingCartIcon,
-} from '@mui/icons-material';
+    Add as AddIcon,
+    Remove as RemoveIcon,
+} from "@mui/icons-material";
 
-const ProductList = ({ products }) => {
+import { addItem } from "../../features/preorderCartSlice.js";
+import {
+    handleIncreaseQuantity,
+    handleDecreaseQuantity,
+    displayFraction,
+} from "../../utils/quantityHandlers.js";
+
+const ProductList = ({
+    products,
+}) => {
     return (
         <Box
             className="product-list"
@@ -32,22 +48,58 @@ const ProductList = ({ products }) => {
             }}
         >
             {products.map((product) => (
-                <ProductCard key={product._id} product={product} />
+                <ProductCard key={product.name} product={product} />
             ))}
         </Box>
     );
 };
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({
+    product,
+}) => {
+    const dispatch = useDispatch();
     const [expanded, setExpanded] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [quantity, setQuantity] = useState('0.5');
+    const [comment, setComment] = useState('');
+
+    const cartRef = useRef(null);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     const handleCartClick = () => {
-        // todo
-        console.log('todo: ProductList: ProductCard.handleCartClick()')
+        setOpen(true);
+        setQuantity('0.5');
+        setComment('');
+    };
+
+    const handleMenuClose = () => {
+        setOpen(false);
+    };
+
+    const handleCommentChange = (e) => {
+        setComment(e.target.value);
+    };
+
+    const handleIncrease = () => {
+        setQuantity(handleIncreaseQuantity(quantity));
+    };
+
+    const handleDecrease = () => {
+        setQuantity(handleDecreaseQuantity(quantity));
+    };
+
+    const handleAddToPreorderCart = () => {
+        dispatch(addItem({
+            productId: product['_id'],
+            name: product.name,
+            quantity,
+            comment,
+        }));
+
+        handleMenuClose();
     }
 
     return (
@@ -92,6 +144,7 @@ const ProductCard = ({ product }) => {
                         objectFit: 'cover',
                         position: 'relative',
                         right: '1rem',
+                        top: '1rem',
                         zIndex: '1',
                     }}
                 />
@@ -99,25 +152,76 @@ const ProductCard = ({ product }) => {
             <CardActions>
                 <Typography variant="body2">{product.priceKg.toFixed(2)} € / kg</Typography>
                 <IconButton
+                    ref={cartRef}
                     onClick={handleCartClick}
-                    aria-label="show more"
+                    aria-label="Mehr anzeigen"
                     sx={{ marginLeft: 'auto' }}
                 >
                     <AddShoppingCartIcon color="primary" />
                 </IconButton>
+                <Menu
+                    anchorEl={cartRef.current}
+                    open={open}
+                    onClose={handleMenuClose}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                >
+                    <MenuItem>
+                        <IconButton onClick={handleDecrease} aria-label="Decrease quantity" size="small">
+                            <RemoveIcon fontSize="small" />
+                        </IconButton>
+                        <Typography variant="body1" sx={{
+                            margin: '0 1rem',
+                            width: '100%',
+                            justifyContent: 'center',
+                            display: 'flex',
+                        }}>
+                            {displayFraction(quantity)}
+                        </Typography>
+                        <IconButton onClick={handleIncrease} aria-label="Increase quantity" size="small">
+                            <AddIcon fontSize="small" />
+                        </IconButton>
+                    </MenuItem>
+                    <MenuItem>
+                        <TextField
+                            variant="filled"
+                            label="Kommentar"
+                            value={comment}
+                            onChange={handleCommentChange}
+                            sx={{
+                                width: '200px',
+                            }}
+                        />
+                    </MenuItem>
+                    <MenuItem onClick={handleAddToPreorderCart}>
+                        <ListItemIcon>
+                            <AddShoppingCartIcon />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Hinzufügen
+                        </ListItemText>
+                    </MenuItem>
+                </Menu>
                 <IconButton
                     onClick={handleExpandClick}
                     aria-expanded={expanded}
-                    aria-label="show more"
+                    aria-label="Mehr anzeigen"
+                    sx={{marginLeft: 'auto'}}
                 >
                     {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography variant="subtitle1">Allergens:</Typography>
+                    <Typography variant="subtitle1">Allergene:</Typography>
                     <Typography variant="body2">{product.allergens.join(', ')}</Typography>
-                    <Typography variant="subtitle1">Ingredients:</Typography>
+                    <Typography variant="subtitle1">Zutaten:</Typography>
                     <Typography variant="body2">{product.ingredients.join(', ')}</Typography>
                 </CardContent>
             </Collapse>

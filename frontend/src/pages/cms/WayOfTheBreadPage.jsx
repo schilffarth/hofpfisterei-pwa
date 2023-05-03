@@ -80,7 +80,7 @@ const CmsContainer = ({
                 sx={{
                     height: '100%',
                     width: '50%',
-                    minWidth: '250px',
+                    minWidth: '300px',
                     position: 'absolute',
                     zIndex: -1,
                     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black background color
@@ -90,7 +90,12 @@ const CmsContainer = ({
                     padding: '2rem 1rem',
                 }}
             >
-                {children}
+                <Box sx={{
+                    maxWidth: '250px',
+                    margin: 'auto',
+                }}>
+                    {children}
+                </Box>
             </Box>
         </Box>
     );

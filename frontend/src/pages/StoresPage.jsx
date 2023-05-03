@@ -1,11 +1,11 @@
 import React from 'react';
 
-const NotFoundPage = () => {
+const StoresPage = () => {
     return (
         <div>
-            <h1>Not Found Page</h1>
+            <h1>todo: Select store from google maps, redirect to preorder page</h1>
         </div>
     );
 };
 
-export default NotFoundPage;
+export default StoresPage;
