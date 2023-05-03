@@ -23,9 +23,11 @@ const getProductById = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
+    console.log(req.body);
     try {
         const newProduct = new Product({
             name: req.body.name,
+            image: req.body.image,
             category: req.body.category,
             type: req.body.type,
             description: req.body.description,
@@ -36,8 +38,6 @@ const createProduct = async (req, res) => {
             discount: req.body.discount,
             size: req.body.size
         });
-
-        console.log(newProduct);
 
         await newProduct.save();
         res.status(201).json({ message: 'Created product successfully.', product: newProduct });

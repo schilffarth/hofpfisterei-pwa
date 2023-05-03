@@ -20,7 +20,7 @@ router.get(
 // Create a new product
 router.put(
     '/create',
-    validationMiddleware(schemas.createProductSchema),
+    // validationMiddleware(schemas.createProductSchema),
     productController.createProduct
 );
 

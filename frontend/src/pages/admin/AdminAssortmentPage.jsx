@@ -22,6 +22,7 @@ import {
     ExpandMore as ExpandMoreIcon,
     ExpandLess as ExpandLessIcon,
 } from "@mui/icons-material";
+import LoadingProgressFallback from "../../components/SuspenseFallback/LoadingProgressFallback.jsx";
 
 import api from "../../utils/api/api";
 import { showNotification } from "../../features/notificationSlice.js";
@@ -29,6 +30,7 @@ import { showNotification } from "../../features/notificationSlice.js";
 const AdminAssortmentPage = () => {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         api.get('/products').then((res) => {
@@ -38,6 +40,8 @@ const AdminAssortmentPage = () => {
                 type: 'error',
                 message: e.response?.data.message,
             }));
+        }).finally(() => {
+            setLoading(false);
         });
     }, [setProducts, dispatch]);
 
@@ -47,9 +51,13 @@ const AdminAssortmentPage = () => {
                 products={products}
                 setProducts={setProducts}
             />
-            <ProductList
-                products={products}
-            />
+            {loading ? (
+                <LoadingProgressFallback />
+            ) : (
+                <ProductList
+                    products={products}
+                />
+            )}
         </Box>
     );
 };
@@ -61,6 +69,7 @@ const CreateProduct = ({
     const dispatch = useDispatch();
     const [active, setActive] = useState(false);
     const [name, setName] = useState('');
+    const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
     const [type, setType] = useState('');
     const [description, setDescription] = useState('');
@@ -72,7 +81,7 @@ const CreateProduct = ({
     const [size, setSize] = useState('');
 
     const checkPriceRegex = (string) => {
-        return /^(\d+(\.\d*)?|\.\d+)$/.test(string);
+        return /^(\d+(\.\d*)?|\.\d+)?$/.test(string);
     }
 
     const handleClick = () => {
@@ -81,6 +90,10 @@ const CreateProduct = ({
 
     const handleNameChange = (e) => {
         setName(e.target.value);
+    }
+
+    const handleImageChange = (e) => {
+        setImage(e.target.value);
     }
 
     const handleCategoryChange = (e) => {
@@ -111,7 +124,7 @@ const CreateProduct = ({
 
     const handlePriceChange = (e) => {
         if (checkPriceRegex(e.target.value)) {
-            setPriceKg(e.target.value);
+            setPrice(e.target.value);
         }
     }
 
@@ -128,6 +141,7 @@ const CreateProduct = ({
 
         api.put('/products/create', {
             name,
+            image,
             category,
             type,
             description,
@@ -150,6 +164,7 @@ const CreateProduct = ({
 
             setActive(false);
             setName('');
+            setImage('');
             setCategory('');
             setType('');
             setDescription('');
@@ -184,6 +199,14 @@ const CreateProduct = ({
                         fullWidth
                         variant="filled"
                         margin="normal"
+                        label="Bild"
+                        value={image}
+                        onChange={handleImageChange}
+                    />
+                    <TextField
+                        fullWidth
+                        variant="filled"
+                        margin="normal"
                         label="Kategorie z.B. Brot, Kleingebäck, Feingebäck, Kuchen, Ausschank, etc."
                         value={category}
                         onChange={handleCategoryChange}
@@ -192,7 +215,7 @@ const CreateProduct = ({
                         fullWidth
                         variant="filled"
                         margin="normal"
-                        label="Typ z.B. Steinbackofenbrot, Weizenkleingebäck, Hefefeingebäck, etc."
+                        label="Typ z.B. Roggenbrot, Weizenkleingebäck, Hefefeingebäck, etc."
                         value={type}
                         onChange={handleTypeChange}
                     />
@@ -311,7 +334,7 @@ const ProductList = ({
     return (
         <List>
             {products.map((product) => {
-                const expanded = product.id === activeItem;
+                const expanded = product['_id'] === activeItem;
 
                 return (<>
                     <ListItem
@@ -322,9 +345,7 @@ const ProductList = ({
                         }}
                     >
                         <ListItemAvatar>
-                            <Avatar>
-                                <ImageIcon />
-                            </Avatar>
+                            <Avatar alt={product.name} src={`/products/${product.image}`} />
                         </ListItemAvatar>
                         <ListItemText
                             primary={product.name}
@@ -332,7 +353,7 @@ const ProductList = ({
                             secondary={product.description}
                             secondaryTypographyProps={{ variant: 'body1' }}
                         />
-                        <IconButton onClick={() => handleClick(product.id)}>
+                        <IconButton onClick={() => handleClick(product['_id'])}>
                             {expanded ? (
                                 <ExpandLessIcon />
                             ) : (
@@ -341,13 +362,22 @@ const ProductList = ({
                         </IconButton>
                     </ListItem>
                     <Collapse in={expanded}>
-                        <List sx={{bgcolor: 'background.paper'}}>
+                        <List dense sx={{bgcolor: 'background.paper'}}>
                             <ListItem key="name">
                                 <ListItemText
                                     inset
                                     primary="Verkehrsbezeichnung"
                                     primaryTypographyProps={{ variant: 'body2', color: 'grey', }}
                                     secondary={product.name}
+                                    secondaryTypographyProps={{ variant: 'body1', color: 'inherit', }}
+                                />
+                            </ListItem>
+                            <ListItem key="image">
+                                <ListItemText
+                                    inset
+                                    primary="Bild"
+                                    primaryTypographyProps={{ variant: 'body2', color: 'grey', }}
+                                    secondary={product.image}
                                     secondaryTypographyProps={{ variant: 'body1', color: 'inherit', }}
                                 />
                             </ListItem>
@@ -401,7 +431,7 @@ const ProductList = ({
                                     inset
                                     primary="Mindestgewicht pro Stück in Gramm"
                                     primaryTypographyProps={{ variant: 'body2', color: 'grey', }}
-                                    secondary={product.size}
+                                    secondary={product.size + 'g'}
                                     secondaryTypographyProps={{ variant: 'body1', color: 'inherit', }}
                                 />
                             </ListItem>
@@ -410,7 +440,7 @@ const ProductList = ({
                                     inset
                                     primary="Preis pro Kilogramm"
                                     primaryTypographyProps={{ variant: 'body2', color: 'grey', }}
-                                    secondary={product.priceKg}
+                                    secondary={product.priceKg + '€'}
                                     secondaryTypographyProps={{ variant: 'body1', color: 'inherit', }}
                                 />
                             </ListItem>
@@ -419,7 +449,7 @@ const ProductList = ({
                                     inset
                                     primary="Preis pro Stück"
                                     primaryTypographyProps={{ variant: 'body2', color: 'grey', }}
-                                    secondary={product.price}
+                                    secondary={product.price + '€'}
                                     secondaryTypographyProps={{ variant: 'body1', color: 'inherit', }}
                                 />
                             </ListItem>
@@ -428,7 +458,7 @@ const ProductList = ({
                                     inset
                                     primary="Aktiver Rabatt"
                                     primaryTypographyProps={{ variant: 'body2', color: 'grey', }}
-                                    secondary={product.discount}
+                                    secondary={product.discount + '%'}
                                     secondaryTypographyProps={{ variant: 'body1', color: 'inherit', }}
                                 />
                             </ListItem>

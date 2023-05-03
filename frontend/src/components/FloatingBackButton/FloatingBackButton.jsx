@@ -41,7 +41,7 @@ const FloatingBackButton = () => {
             id='floating-back-button'
             onClick={handleBack}
         >
-            <Avatar sx={{ bgcolor: theme.palette.background.paper }}>
+            <Avatar sx={{ bgcolor: 'rgb(0, 0, 0, 0.2)' }}>
                 <ArrowBackIcon color="primary" />
             </Avatar>
         </IconButton>

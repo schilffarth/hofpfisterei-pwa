@@ -1,7 +1,7 @@
 // Helper functions
 
 const createValidationSchema = (field, validationOptions) => {
-    const { type, location, required, min, errorMessage } = validationOptions;
+    const { type, location, required, min, errorMessage, customValidation } = validationOptions;
     let commonValidation = {
         in: location,
         trim: true,
@@ -12,6 +12,8 @@ const createValidationSchema = (field, validationOptions) => {
     if (type) commonValidation[type] = true;
 
     if (min) commonValidation.isLength = { options: { min: min } };
+
+    if (customValidation) commonValidation.custom = customValidation;
 
     commonValidation.errorMessage = errorMessage;
 
@@ -46,6 +48,12 @@ const createProductSchema = {
         required: true,
         errorMessage: 'Name is required.',
     }),
+    ...createValidationSchema('image', {
+        location: 'body',
+        type: 'isString',
+        required: true,
+        errorMessage: 'Image link is required.',
+    }),
     ...createValidationSchema('category', {
         location: 'body',
         type: 'isString',
@@ -69,24 +77,48 @@ const createProductSchema = {
         type: 'isString',
         required: true,
         errorMessage: 'Allergens are required.',
+        customValidation: {
+            options: (value) => {
+                return Array.isArray(JSON.parse(value));
+            },
+            errorMessage: 'Allergens should be an array.',
+        },
     }),
     ...createValidationSchema('ingredients', {
         location: 'body',
         type: 'isString',
         required: true,
         errorMessage: 'Ingredients are required.',
+        customValidation: {
+            options: (value) => {
+                return Array.isArray(JSON.parse(value));
+            },
+            errorMessage: 'Ingredients should be an array.',
+        },
     }),
     ...createValidationSchema('priceKg', {
         location: 'body',
         type: 'isString',
         required: true,
         errorMessage: 'Price per kg is required.',
+        customValidation: {
+            options: (value) => {
+                return !isNaN(parseFloat(value));
+            },
+            errorMessage: 'Price per kg should be a numeric value.',
+        },
     }),
     ...createValidationSchema('price', {
         location: 'body',
         type: 'isString',
         required: true,
         errorMessage: 'Price per whole piece is required.',
+        customValidation: {
+            options: (value) => {
+                return !isNaN(parseFloat(value));
+            },
+            errorMessage: 'Price per whole piece should be a numeric value.',
+        },
     }),
     ...createValidationSchema('discount', {
         location: 'body',

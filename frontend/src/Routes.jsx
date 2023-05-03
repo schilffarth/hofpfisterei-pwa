@@ -7,6 +7,7 @@ import GlobalNotification from "./components/GlobalNotification/GlobalNotificati
 import Navbar from "./components/NavBar/NavBar.jsx";
 import LoadingProgressFallback from "./components/SuspenseFallback/LoadingProgressFallback.jsx";
 import AdminAssortmentPage from "./pages/admin/AdminAssortmentPage.jsx";
+import WayOfTheBread from "./pages/cms/WayOfTheBreadPage.jsx";
 
 // Lazy-loaded routes
 const LandingPage = lazy(() => import("./pages/LandingPage.jsx"));
@@ -45,6 +46,9 @@ const AppRoutes = () => {
                             <Route path="/preorder" element={<PreorderPage />} />
                             <Route path="*" element={<NotFoundPage />} />
 
+                            {/* CMS */}
+                            <Route path="/way-of-the-bread" element={<WayOfTheBread />} />
+
                             <Route path="/admin" element={<AdminPage />}>
                                 <Route path="dashboard" element={<AdminDashboardPage />} />
                                 <Route path="preorders" element={<AdminPreordersPage />} />
@@ -54,7 +58,8 @@ const AppRoutes = () => {
                     </Suspense>
                 </div>
             </div>
-            <Box sx={{ height: 56 }}/> {/* Spacing so the BottomNavBar doesn't overlap */}
+            <Box id="bottom-navbar-spacing" sx={{ height: 56 }} /> {/* Spacing so the BottomNavBar doesn't
+             overlap */}
             <GlobalNotification />
             <BottomNavBar />
         </BrowserRouter>
