@@ -361,7 +361,10 @@ const ProductList = ({
                             )}
                         </IconButton>
                     </ListItem>
-                    <Collapse in={expanded}>
+                    <Collapse
+                        key={product.id + "-collapse"}
+                        in={expanded}
+                    >
                         <List dense sx={{bgcolor: 'background.paper'}}>
                             <ListItem key="name">
                                 <ListItemText

@@ -1,13 +1,21 @@
 import {
+    LocationOn as LocationOnIcon,
+    East as EastIcon
+} from "@mui/icons-material";
+import {
     Box,
-    Typography,
+    Typography, Button,
 } from "@mui/material";
 
+import useNavigate from "../../components/Link/useNavigate";
+
 const WayOfTheBreadPage = () => {
+    const navigate = useNavigate();
+
     return (
         <Box>
             <CmsContainer
-                image="wayofthebread_001.jpeg"
+                image="wayofthebread/002.jpeg"
                 alignment="right"
             >
                 <Typography
@@ -20,26 +28,81 @@ const WayOfTheBreadPage = () => {
                     variant="h6"
                     color="secondary"
                 >
-                    Das Anstellgut, eine Portion ausgereifter Vollsauer, wird durch Zugabe
-                    von Mehl, Wasser und 24 Stunden Geduld zum Anfrischsauer. In ihm entwickeln sich die
-                    teiglockernden Hefen.
+                    Das Anstellgut ist eine Portion ausgereifter Vollsauer.
+                    Es wird durch Zugabe von Mehl, Wasser und Geduld zum Anfrischsauer.
+                    In ihm entwickeln sich die teiglockernden Hefen.
                 </Typography>
             </CmsContainer>
             <CmsContainer
-                image="wayofthebread_009.jpeg"
+                image="wayofthebread/004.jpeg"
                 alignment="left"
             >
                 <Typography
                     variant="overline"
                     color="secondary"
                 >
-                    Filiale
+                    Grundsauer
                 </Typography>
                 <Typography
                     variant="h6"
                     color="secondary.light"
                 >
-                    Blabla nach langem asdfasdfaf
+                    In der wichtigsten Stufe haben die Milchsäurebakterien Zeit, sich zu entwickeln.
+                    Auf ganz natürliche Art entsteht im Grundsauer die Vielfalt des Pfister-typischen Geschmacks.
+                </Typography>
+            </CmsContainer>
+            <CmsContainer
+            image="wayofthebread/006.jpeg"
+            alignment="right"
+            >
+                <Typography
+                    variant="overline"
+                    color="secondary"
+                >
+                    Vollsauer
+                </Typography>
+                <Typography
+                    variant="h6"
+                    color="secondary.light"
+                >
+                    Der reife Grundsauer wird durch die Zugabe von verschiedenen Mehlen, Wasser und Zeit
+                    zum sortenspezifischen Vollsauer. Die Säureverhältnisse harmonisieren sich.
+                </Typography>
+            </CmsContainer>
+            <CmsContainer
+                image="wayofthebread/008.jpeg"
+                alignment="left"
+            >
+                <Typography
+                    variant="overline"
+                    color="secondary"
+                >
+                    Der fertige Teig
+                </Typography>
+                <Typography
+                    variant="h6"
+                    color="secondary.light"
+                >
+                    Durch Zugabe von Mehl, Wasser und Saltz, sowie Gewürze, Ölsaaten oder Nüsse,
+                    wird aus dem reifen Vollsauer der sortenspezifische Teig hergestellt.
+                </Typography>
+            </CmsContainer>
+            <CmsContainer
+                image="wayofthebread/009.jpeg"
+                alignment="right"
+            >
+                <Typography
+                    variant="overline"
+                    color="secondary"
+                >
+                    Das Brot Zuhause
+                </Typography>
+                <Typography
+                    variant="h6"
+                    color="secondary.light"
+                >
+                    In täglich zehntausenden Haushalten wird die sorgfältig produzierte Pfisterqualität
+                    in vollen Zügen genossen.
                 </Typography>
             </CmsContainer>
         </Box>
@@ -62,7 +125,6 @@ const CmsContainer = ({
                 flexWrap: 'wrap',
                 justifyContent: alignment,
             }}
-            className="landing-page"
         >
             <Box
                 component="img" // Set the Box component to render an img element
@@ -79,7 +141,7 @@ const CmsContainer = ({
             <Box
                 sx={{
                     height: '100%',
-                    width: '50%',
+                    width: '60%',
                     minWidth: '300px',
                     position: 'absolute',
                     zIndex: -1,
@@ -91,7 +153,8 @@ const CmsContainer = ({
                 }}
             >
                 <Box sx={{
-                    maxWidth: '250px',
+                    minWidth: '250px',
+                    maxWidth: '400px',
                     margin: 'auto',
                 }}>
                     {children}

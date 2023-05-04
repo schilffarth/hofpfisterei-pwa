@@ -232,7 +232,7 @@ const PreorderCheckoutPage = () => {
                         }}>
                             <DoneIcon color="success" sx={{ fontSize: '4rem' }}/>
                             <br/>
-                            <Typography variant="h6" color="success.main">
+                            <Typography variant="body1" color="success.main">
                                 Wir haben Ihre Vorbestellung erhalten!
                             </Typography>
                         </Box>

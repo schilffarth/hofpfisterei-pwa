@@ -16,8 +16,12 @@ form.app-form > * {
     margin: 3rem auto;
 }
 
-#app .page .landing-page {
+#app .page.landing-page {
     margin: 0;
     padding: 0;
     max-width: 100%;
+}
+
+#app .page.preorder-page {
+    max-width: 1200px;
 }

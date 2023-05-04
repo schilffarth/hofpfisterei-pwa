@@ -87,6 +87,7 @@ export const createAppTheme = (mode) => {
             },
             h6: {
                 fontWeight: 'bold',
+                fontSize: '1.5rem',
             }
         },
         components: {

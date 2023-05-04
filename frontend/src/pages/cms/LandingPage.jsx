@@ -13,14 +13,14 @@ import {
     School as SchoolIcon,
 } from "@mui/icons-material";
 
-import useNavigate from "../components/Link/useNavigate";
+import useNavigate from "../../components/Link/useNavigate.js";
 
 const LandingPage = () => {
     return (
         <>
             <HeroSection />
-            <StoreSection />
             <JobSection />
+            <StoreSection />
         </>
     );
 };

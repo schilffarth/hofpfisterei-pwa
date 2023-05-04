@@ -8,7 +8,7 @@
 }
 
 #burger-menu .link-list {
-    padding-right: 5rem;
+    min-width: 300px;
 }
 
 #burger-menu .burger-menu > div {

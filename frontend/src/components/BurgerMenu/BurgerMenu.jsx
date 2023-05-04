@@ -11,14 +11,18 @@ import {
     Typography,
     Paper,
     Stack,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
 } from "@mui/material";
 import {
     Close as CloseIcon,
-    LocationOn as LocationOnIcon,
-    ShoppingCart as ShoppingCartIcon,
-    Sell as SellIcon,
+    Work as WorkIcon,
+    School as SchoolIcon,
     FollowTheSigns as FollowTheSignsIcon,
     Lightbulb as LightbulbIcon,
+    ExpandMore as ExpandMoreIcon,
+    WbIncandescent as WbIncandescentIcon,
 } from '@mui/icons-material';
 import './BurgerMenu.css';
 
@@ -47,56 +51,136 @@ const BurgerMenu = ({ open, onClose }) => {
                             </IconButton>
                         </Box>
                         <List className="link-list">
-                            <Link to="/stores" onClick={handleClose} replace>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <LocationOnIcon />
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Filialen
-                                    </ListItemText>
-                                </ListItem>
-                            </Link>
-                            <Link to="/products" onClick={handleClose} replace>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <SellIcon />
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Sortiment (Pfister-Brote, Kleingebäck, Feingebäck)
-                                    </ListItemText>
-                                </ListItem>
-                            </Link>
-                            <Link to="/preorder" onClick={handleClose} replace>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <ShoppingCartIcon />
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Vorbestellen
-                                    </ListItemText>
-                                </ListItem>
-                            </Link>
-                            <Link to="/preorder" onClick={handleClose} replace>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <FollowTheSignsIcon />
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Karriere (Stellenangebote, Ausbildung)
-                                    </ListItemText>
-                                </ListItem>
-                            </Link>
-                            <Link to="/preorder" onClick={handleClose} replace>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <LightbulbIcon />
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Infothek (...)
-                                    </ListItemText>
-                                </ListItem>
-                            </Link>
+                            <Accordion
+                                sx={{
+                                    width: '100%',
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                    },
+                                    '&.Mui-expanded': {
+                                        backgroundColor: 'transparent',
+                                    },
+                                }}
+                            >
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <FollowTheSignsIcon />
+                                        </ListItemIcon>
+                                        <ListItemText>
+                                            Karriere
+                                        </ListItemText>
+                                    </ListItem>
+                                </AccordionSummary>
+                                <AccordionDetails sx={{padding: '0 3rem 1rem'}}>
+                                    <Link to="/career" onClick={handleClose} replace>
+                                        <Box sx={{
+                                            marginBottom: '1rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            color: 'text.secondary'
+                                        }}>
+                                            <WorkIcon fontSize="xs" />
+                                            <Typography ml={1}>
+                                                Stellenangebote
+                                            </Typography>
+                                        </Box>
+                                    </Link>
+                                    <Link to="/career" onClick={handleClose} replace>
+                                        <Box sx={{
+                                            marginBottom: '1rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            color: 'text.secondary'
+                                        }}>
+                                            <SchoolIcon fontSize="xs" />
+                                            <Typography ml={1}>
+                                                Ausbildung
+                                            </Typography>
+                                        </Box>
+                                    </Link>
+                                    <Link to="/career" onClick={handleClose} replace>
+                                        <Box sx={{
+                                            marginBottom: '1rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            color: 'text.secondary'
+                                        }}>
+                                            <WbIncandescentIcon fontSize="xs" />
+                                            <Typography ml={1}>
+                                                Initiativbewerbung
+                                            </Typography>
+                                        </Box>
+                                    </Link>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion
+                                sx={{
+                                    width: '100%',
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                    },
+                                    '&.Mui-expanded': {
+                                        backgroundColor: 'transparent',
+                                    },
+                                }}
+                            >
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <LightbulbIcon />
+                                        </ListItemIcon>
+                                        <ListItemText>
+                                            Infothek
+                                        </ListItemText>
+                                    </ListItem>
+                                </AccordionSummary>
+                                <AccordionDetails sx={{padding: '0 3rem 1rem'}}>
+                                    <Link to="/career" onClick={handleClose} replace>
+                                        <Box sx={{
+                                            marginBottom: '1rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            color: 'text.secondary'
+                                        }}>
+                                            <WorkIcon fontSize="xs" />
+                                            <Typography ml={1}>
+                                                Firmenphilosophie
+                                            </Typography>
+                                        </Box>
+                                    </Link>
+                                    <Link to="/career" onClick={handleClose} replace>
+                                        <Box sx={{
+                                            marginBottom: '1rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            color: 'text.secondary'
+                                        }}>
+                                            <SchoolIcon fontSize="xs" />
+                                            <Typography ml={1}>
+                                                Der Weg des Brotes
+                                            </Typography>
+                                        </Box>
+                                    </Link>
+                                    <Link to="/career" onClick={handleClose} replace>
+                                        <Box sx={{
+                                            marginBottom: '1rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            color: 'text.secondary'
+                                        }}>
+                                            <WbIncandescentIcon fontSize="xs" />
+                                            <Typography ml={1}>
+                                                Initiativbewerbung
+                                            </Typography>
+                                        </Box>
+                                    </Link>
+                                </AccordionDetails>
+                            </Accordion>
                         </List>
                     </div>
                     <div className="footer-bottom">

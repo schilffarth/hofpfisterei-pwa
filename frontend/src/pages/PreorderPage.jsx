@@ -79,7 +79,7 @@ const PreorderPage = () => {
     }, [setProducts]);
 
     return (
-        <Box className="page">
+        <Box className="page preorder-page">
             <AutoComplete
                 options={storeOptions}
                 value={storeValue}
@@ -107,7 +107,7 @@ const AutoComplete = ({
     return (
         <Box>
             <Autocomplete
-                fullWidth
+                sx={{ maxWidth: 'sm', margin: 'auto' }}
                 value={value}
                 onChange={(event, newValue) => {
                     setValue(newValue);
@@ -119,7 +119,7 @@ const AutoComplete = ({
                 id="controllable-stores-select"
                 options={options}
                 renderInput={(params) => (
-                    <TextField {...params} label="Filiale" />
+                    <TextField autoFocus {...params} label="Filiale" />
                 )}
             />
         </Box>

@@ -10,7 +10,7 @@ import AdminAssortmentPage from "./pages/admin/AdminAssortmentPage.jsx";
 import WayOfTheBread from "./pages/cms/WayOfTheBreadPage.jsx";
 
 // Lazy-loaded routes
-const LandingPage = lazy(() => import("./pages/LandingPage.jsx"));
+const LandingPage = lazy(() => import("./pages/cms/LandingPage.jsx"));
 const StoresPage = lazy(() => import("./pages/StoresPage.jsx"));
 const PreorderPage = lazy(() => import("./pages/PreorderPage.jsx"));
 const PreorderCheckoutPage = lazy(() => import("./pages/PreorderCheckoutPage.jsx"));

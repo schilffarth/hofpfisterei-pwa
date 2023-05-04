@@ -43,10 +43,8 @@ const ProductList = ({
                 gridTemplateColumns: {
                     xs: 'repeat(1, 1fr)',
                     sm: 'repeat(2, 1fr)',
-                    lg: 'repeat(3, 1fr)',
                 },
                 gap: '1rem',
-                padding: '1rem',
             }}
         >
             {products.map((product) => (
@@ -152,7 +150,12 @@ const ProductCard = ({
                 />
             </Box>
             <CardActions>
-                <Typography variant="body2">{product.priceKg.toFixed(2)} € / kg</Typography>
+                <Typography variant="body2">
+                    {(product.priceKg / 10).toFixed(2)} € / 100g
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    {product.price.toFixed(2)} € / {product.size / 1000} kg
+                </Typography>
                 <IconButton
                     ref={cartRef}
                     onClick={handleCartClick}
