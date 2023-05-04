@@ -4,10 +4,10 @@ import {
     BottomNavigation,
     BottomNavigationAction,
     Menu,
-    MenuItem,
     IconButton,
     Typography,
     Box,
+    ListItem,
     ListItemText,
     TextField,
     Button,
@@ -168,77 +168,84 @@ const PreorderCartMenu = ({
                 horizontal: 'left',
             }}
         >
-            {preorderCart.length ? preorderCart.map((item, index) => (
-                <MenuItem key={index} sx={{ padding: '1rem', minWidth: '300px' }}>
-                    <Box sx={{width: '100%'}}>
-                        <Box sx={{ display: 'flex' }}>
-                            <IconButton onClick={() => handleEdit(item)} size="small">
-                                <EditIcon fontSize="small" />
-                            </IconButton>
-                            {edit === item.productId ? (
-                                <Stack>
-                                    <ListItemText primary={item.name} />
-                                    <TextField
-                                        autoFocus
-                                        variant="filled"
-                                        label="Kommentar"
-                                        value={editValue}
-                                        onChange={handleCommentChange}
-                                    />
-                                </Stack>
-                            ) : (
-                                <ListItemText
-                                    primary={item.name}
-                                    secondary={item.comment}
-                                />
-                            )}
-                        </Box>
-                        <Box sx={{display: 'flex', width: '100%' }}>
-                            <IconButton onClick={() => handleDelete(item)} aria-label="Increase quantity" size="small">
-                                <DeleteIcon fontSize="small" />
-                            </IconButton>
-                            <IconButton onClick={() => handleDecrease(item)} aria-label="Decrease quantity" size="small">
-                                <RemoveIcon fontSize="small" />
-                            </IconButton>
-                            <Typography variant="body1" sx={{
-                                margin: 'auto',
-                                justifyContent: 'center',
-                                display: 'flex',
-                            }}>
-                                {displayFraction(item.quantity)}
-                            </Typography>
-                            <IconButton onClick={() => handleIncrease(item)} aria-label="Increase quantity" size="small">
-                                <AddIcon fontSize="small" />
-                            </IconButton>
-                        </Box>
-                        {edit === item.productId && (
-                            <Box mt="1rem">
-                                <Button
-                                    fullWidth
-                                    variant="outlined"
-                                    onClick={() => handleCommentSave(item)}
-                                >
-                                    Speichern
-                                </Button>
+            {preorderCart.length ? (
+                <Box>
+                    {preorderCart.map((item, index) => (
+                        <ListItem key={index} sx={{ padding: '1rem', minWidth: '300px' }}>
+                            <Box sx={{width: '100%'}}>
+                                <Box sx={{ display: 'flex' }}>
+                                    <IconButton onClick={() => handleEdit(item)} size="small">
+                                        <EditIcon fontSize="small" />
+                                    </IconButton>
+                                    {edit === item.productId ? (
+                                        <Stack>
+                                            <ListItemText primary={item.name} />
+                                            <TextField
+                                                autoFocus
+                                                variant="filled"
+                                                label="Kommentar"
+                                                value={editValue}
+                                                onChange={handleCommentChange}
+                                            />
+                                        </Stack>
+                                    ) : (
+                                        <ListItemText
+                                            primary={item.name}
+                                            secondary={item.comment}
+                                        />
+                                    )}
+                                </Box>
+                                {edit === item.productId && (
+                                    <Box mt={1} mb={2}>
+                                        <Button
+                                            fullWidth
+                                            variant="outlined"
+                                            onClick={() => handleCommentSave(item)}
+                                        >
+                                            Speichern
+                                        </Button>
+                                    </Box>
+                                )}
+                                <Box sx={{display: 'flex', width: '100%' }}>
+                                    <IconButton onClick={() => handleDelete(item)} aria-label="Increase quantity" size="small">
+                                        <DeleteIcon fontSize="small" />
+                                    </IconButton>
+                                    <IconButton onClick={() => handleDecrease(item)} aria-label="Decrease quantity" size="small">
+                                        <RemoveIcon fontSize="small" />
+                                    </IconButton>
+                                    <Typography variant="body1" sx={{
+                                        margin: 'auto',
+                                        justifyContent: 'center',
+                                        display: 'flex',
+                                    }}>
+                                        {displayFraction(item.quantity)}
+                                    </Typography>
+                                    <IconButton onClick={() => handleIncrease(item)} aria-label="Increase quantity" size="small">
+                                        <AddIcon fontSize="small" />
+                                    </IconButton>
+                                </Box>
                             </Box>
-                        )}
+                        </ListItem>
+                    ))}
+                    <Box sx={{ padding: '1rem'}}>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            endIcon={<EastIcon />}
+                            onClick={() => {
+                                handleMenuClose();
+                                navigate("/preorder-checkout");
+                            }}
+                        >
+                            Vorbestellen
+                        </Button>
                     </Box>
-                </MenuItem>
-            )) : (
+                </Box>
+            ) : (
                 <Box sx={{ padding: '1rem 3rem' }}>
                     Keine Produkte
                 </Box>
             )}
-            <Box sx={{ padding: '1rem'}}>
-                <Button
-                    fullWidth
-                    variant="contained"
-                    endIcon={<EastIcon />}
-                    onClick={() => navigate("/preorder-checkout")}
-                >
-                    Vorbestellen
-                </Button>
-            </Box>
         </Menu>
     );
 };

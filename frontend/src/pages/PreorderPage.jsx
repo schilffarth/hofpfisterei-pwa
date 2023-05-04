@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     Box,
     Autocomplete,
@@ -10,6 +10,7 @@ import ProductList from "../components/ProductList/ProductList.jsx";
 import LoadingProgressFallback from "../components/SuspenseFallback/LoadingProgressFallback.jsx";
 import { showNotification } from "../features/notificationSlice.js";
 import api from "../utils/api/api.js";
+import { setStore } from "../features/preorderCartSlice";
 
 const PreorderPage = () => {
     const storeOptions = [
@@ -55,12 +56,14 @@ const PreorderPage = () => {
         'Oberföhringer Straße 2, 81679 München',
     ];
 
-    const [storeValue, setStoreValue] = useState(storeOptions[0]);
     const [storeInputValue, setStoreInputValue] = useState('');
 
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const storeValue = useSelector((state) => state.preorderCart.store);
+    const setStoreValue = (value) => dispatch(setStore(value));
 
     useEffect(() => {
         api.get('/products').then((res) => {

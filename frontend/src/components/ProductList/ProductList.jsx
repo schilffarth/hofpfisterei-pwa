@@ -11,8 +11,10 @@ import {
     CardMedia,
     Menu,
     MenuItem,
+    ListItem,
     ListItemIcon,
-    ListItemText, TextField,
+    ListItemText,
+    TextField,
 } from "@mui/material";
 import {
     ExpandMore as ExpandMoreIcon,
@@ -172,7 +174,7 @@ const ProductCard = ({
                         horizontal: 'right',
                     }}
                 >
-                    <MenuItem>
+                    <ListItem>
                         <IconButton onClick={handleDecrease} aria-label="Decrease quantity" size="small">
                             <RemoveIcon fontSize="small" />
                         </IconButton>
@@ -187,8 +189,8 @@ const ProductCard = ({
                         <IconButton onClick={handleIncrease} aria-label="Increase quantity" size="small">
                             <AddIcon fontSize="small" />
                         </IconButton>
-                    </MenuItem>
-                    <MenuItem>
+                    </ListItem>
+                    <ListItem>
                         <TextField
                             variant="filled"
                             label="Kommentar"
@@ -198,7 +200,7 @@ const ProductCard = ({
                                 width: '200px',
                             }}
                         />
-                    </MenuItem>
+                    </ListItem>
                     <MenuItem onClick={handleAddToPreorderCart}>
                         <ListItemIcon>
                             <AddShoppingCartIcon />

@@ -145,7 +145,7 @@ const StoreSection = () => {
             <Typography
                 variant="h1"
                 align="center"
-                color="inherit"
+                color="black"
                 sx={{
                     width: '100%',
                     padding: `${spacing} 0 0`,
@@ -160,7 +160,7 @@ const StoreSection = () => {
             <Typography
                 variant="h5"
                 align="center"
-                color="inherit"
+                color="black"
                 sx={{
                     width: '100%',
                     padding: `0 0 ${spacing}`,
@@ -179,22 +179,22 @@ const StoreSection = () => {
                 <Button
                     fullWidth
                     variant="contained"
-                    startIcon={<LocationOnIcon color="inherit" />}
-                    endIcon={<EastIcon color="inherit"  />}
+                    startIcon={<LocationOnIcon color="black" />}
+                    endIcon={<EastIcon color="black"  />}
                     onClick={() => navigate("/stores")}
                     sx={{
                         minWidth: '300px',
                         maxWidth: '600px',
                         margin: '0 5rem',
-                        backgroundColor: "background.paper",
+                        backgroundColor: "white",
                         "&:hover": {
-                            backgroundColor: "background.paper", // Maintain the same color on hover
+                            backgroundColor: "white", // Maintain the same color on hover
                         },
                     }}
                 >
                     <Typography
                         variant="overline"
-                        color="inherit"
+                        color="black"
                     >
                         Meine Filiale
                     </Typography>

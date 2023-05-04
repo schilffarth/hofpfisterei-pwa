@@ -126,6 +126,11 @@ const BurgerMenu = ({ open, onClose }) => {
                                     Impressum
                                 </Link>
                             </Typography>
+                            <Typography variant="body2" align="center" color="grey">
+                                <Link replace to="/admin/dashboard" onClick={handleClose}>
+                                    Admin
+                                </Link>
+                            </Typography>
                         </Box>
                         <Box className="copyright">
                             <Typography variant="body2" align="center">

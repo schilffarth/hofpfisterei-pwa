@@ -2,12 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     items: [],
+    store: '',
 };
 
 const preorderCartSlice = createSlice({
     name: 'preorderCart',
     initialState,
     reducers: {
+        setStore: (state, action) => {
+            state.store = action.payload;
+        },
+
         addItem: (state, action) => {
             let toAdd = true;
 
@@ -52,9 +57,13 @@ const preorderCartSlice = createSlice({
                 (item) => item.productId !== action.payload
             );
         },
+
+        clearPreorderCart: (state, action) => {
+            state.items = [];
+        }
     },
 });
 
-export const { addItem, updateComment, removeItem } = preorderCartSlice.actions;
+export const { addItem, updateComment, removeItem, setStore, clearPreorderCart } = preorderCartSlice.actions;
 
 export default preorderCartSlice.reducer;
