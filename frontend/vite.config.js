@@ -13,4 +13,7 @@ export default defineConfig({
       '@mui/x-date-pickers/AdapterDayjs',
     ],
   },
+  server: {
+    host: true,
+  }
 })

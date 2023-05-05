@@ -25,6 +25,7 @@ import {
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { setStore, clearPreorderCart } from "../features/preorderCartSlice.js";
+import api from "../utils/api/api.js";
 
 import { displayFraction } from "../utils/quantityHandlers.js";
 import useNavigate from "../components/Link/useNavigate";
@@ -46,7 +47,7 @@ const PreorderCheckoutPage = () => {
     const storeAddress = useSelector((state) => state.preorderCart.store);
 
     useEffect(() => {
-        if (activeStep !== steps.length -1) {
+        if (!activeStep) {
             let message = '';
 
             if (!cartItems.length && !storeAddress) {
@@ -89,12 +90,32 @@ const PreorderCheckoutPage = () => {
 
                 return;
             }
-        } else if (activeStep === 1) {
-            dispatch(setStore(''));
-            dispatch(clearPreorderCart());
-        }
 
-        setActiveStep((prevStep) => prevStep + 1);
+            setActiveStep(1);
+        } else if (activeStep === 1) {
+            api.put('/preorders/create', {
+                store: storeAddress,
+                pickup: userInfo.pickup,
+                products: cartItems,
+                customerName: userInfo.name,
+                customerEmail: userInfo.email,
+                customerPhone: userInfo.phone,
+            }).then((res) => {
+                setActiveStep(2);
+
+                dispatch(setStore(''));
+                dispatch(clearPreorderCart());
+                dispatch(showNotification({
+                    type: 'success',
+                    message: res.data.message,
+                }));
+            }).catch((e) => {
+                dispatch(showNotification({
+                    type: 'error',
+                    message: e.response?.data.message,
+                }));
+            });
+        }
     };
 
     const handleBack = () => {

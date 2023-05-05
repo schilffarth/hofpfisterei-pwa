@@ -23,10 +23,12 @@ try {
 
 // Import your route handlers here
 const productRoutes = require('./routes/productRoutes');
+const preorderRoutes = require('./routes/preorderRoutes');
 // ...
 
 // Mount your route handlers
 app.use('/api/products', productRoutes);
+app.use('/api/preorders', preorderRoutes);
 // ...
 
 const PORT = process.env.PORT || 3001;

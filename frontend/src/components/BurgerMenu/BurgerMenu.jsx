@@ -216,11 +216,11 @@ const BurgerMenu = ({ open, onClose }) => {
                                 </Link>
                             </Typography>
                         </Box>
-                        <Box className="copyright">
+                        {/*<Box className="copyright">
                             <Typography variant="body2" align="center">
                                 &copy; {new Date().getFullYear()} Ludwig Stocker Hofpfisterei GmbH
                             </Typography>
-                        </Box>
+                        </Box>*/}
                         <Box className="copyright created-by">
                             <Typography variant="body2" align="center" color="primary">
                                 Created and provided by Roland Peter Schilffarth

@@ -187,6 +187,7 @@ const CreateProduct = ({
             {active ? (
                 <form onSubmit={handleSubmit}>
                     <TextField
+                        key="name"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -196,6 +197,7 @@ const CreateProduct = ({
                         autoFocus
                     />
                     <TextField
+                        key="image"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -204,6 +206,7 @@ const CreateProduct = ({
                         onChange={handleImageChange}
                     />
                     <TextField
+                        key="category"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -212,6 +215,7 @@ const CreateProduct = ({
                         onChange={handleCategoryChange}
                     />
                     <TextField
+                        key="type"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -220,6 +224,7 @@ const CreateProduct = ({
                         onChange={handleTypeChange}
                     />
                     <TextField
+                        key="description"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -228,6 +233,7 @@ const CreateProduct = ({
                         onChange={handleDescriptionChange}
                     />
                     <TextField
+                        key="allergens"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -236,6 +242,7 @@ const CreateProduct = ({
                         onChange={handleAllergensChange}
                     />
                     <TextField
+                        key="ingredients"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -244,6 +251,7 @@ const CreateProduct = ({
                         onChange={handleIngredientsChange}
                     />
                     <TextField
+                        key="size"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -255,6 +263,7 @@ const CreateProduct = ({
                         }}
                     />
                     <TextField
+                        key="priceKg"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -266,6 +275,7 @@ const CreateProduct = ({
                         }}
                     />
                     <TextField
+                        key="price"
                         fullWidth
                         variant="filled"
                         margin="normal"
@@ -277,6 +287,7 @@ const CreateProduct = ({
                         }}
                     />
                     <TextField
+                        key="discount"
                         fullWidth
                         variant="filled"
                         margin="normal"

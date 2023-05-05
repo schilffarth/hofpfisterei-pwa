@@ -1,16 +1,9 @@
 import {
-    LocationOn as LocationOnIcon,
-    East as EastIcon
-} from "@mui/icons-material";
-import {
     Box,
-    Typography, Button,
+    Typography,
 } from "@mui/material";
 
-import useNavigate from "../../components/Link/useNavigate";
-
 const WayOfTheBreadPage = () => {
-    const navigate = useNavigate();
 
     return (
         <Box>
@@ -83,7 +76,7 @@ const WayOfTheBreadPage = () => {
                     variant="h6"
                     color="secondary.light"
                 >
-                    Durch Zugabe von Mehl, Wasser und Saltz, sowie Gewürze, Ölsaaten oder Nüsse,
+                    Durch Zugabe von Mehl, Wasser und Salz, sowie Gewürze, Ölsaaten oder Nüsse,
                     wird aus dem reifen Vollsauer der sortenspezifische Teig hergestellt.
                 </Typography>
             </CmsContainer>

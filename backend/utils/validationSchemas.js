@@ -134,10 +134,65 @@ const createProductSchema = {
     }),
 };
 
+const getPreorderByIdSchema = {
+    ...createValidationSchema("preorderId", {
+        location: "params",
+        type: "isString",
+        required: true,
+        errorMessage: "Preorder ID is required.",
+    }),
+};
+
+const createPreorderSchema = {
+    ...createValidationSchema("store", {
+        location: "body",
+        type: "isString",
+        required: true,
+        errorMessage: "Store is required.",
+    }),
+    ...createValidationSchema("pickup", {
+        location: "body",
+        type: "isISO8601",
+        required: true,
+        errorMessage: "Pickup date is required and should be in ISO 8601 format.",
+    }),
+    ...createValidationSchema("products", {
+        location: "body",
+        required: true,
+        errorMessage: "Products are required.",
+        customValidation: {
+            options: (value) => {
+                return Array.isArray(value);
+            },
+            errorMessage: "Products should be an array.",
+        },
+    }),
+    ...createValidationSchema("customerName", {
+        location: "body",
+        type: "isString",
+        required: true,
+        errorMessage: "Customer name is required.",
+    }),
+    ...createValidationSchema("customerEmail", {
+        location: "body",
+        type: "isEmail",
+        required: true,
+        errorMessage: "Customer email is required and should be a valid email address.",
+    }),
+    ...createValidationSchema("customerPhone", {
+        location: "body",
+        type: "isString",
+        required: true,
+        errorMessage: "Customer phone is required and should be a valid phone number.",
+    }),
+};
+
 // Export schemas
 
 module.exports = {
     getProductByIdSchema,
     createProductSchema,
+    getPreorderByIdSchema,
+    createPreorderSchema,
     // Export other schemas here
 };

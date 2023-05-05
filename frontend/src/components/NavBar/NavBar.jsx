@@ -102,7 +102,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -154,7 +154,7 @@ const DisclaimerDialog = ({
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        The content and information provided on this website are intended for informational and educational purposes only and are not affiliated with, endorsed by, or sponsored by Company X or any of its subsidiaries, affiliates, or partners. The views and opinions expressed on this website are solely those of the website owner and contributors and do not represent the views or opinions of Company X.
+                        The content and information provided on this website are intended for informational and educational purposes only and are not affiliated with, endorsed by, or sponsored by Ludwig Stocker Hofpfisterei GmbH or any of its subsidiaries, affiliates, or partners. The views and opinions expressed on this website are solely those of the website owner and contributors and do not represent the views or opinions of Ludwig Stocker Hofpfisterei GmbH.
                         <br/><br/>
                         All information on this website is provided "as is" without any warranties of any kind, express or implied. The website owner and contributors make no representations or warranties as to the accuracy, completeness, timeliness, or suitability of any information provided on this website.
                         <br/><br/>
@@ -177,7 +177,7 @@ const DisclaimerDialog = ({
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Die auf dieser Website bereitgestellten Inhalte und Informationen dienen ausschließlich Informations- und Bildungszwecken und sind nicht mit Company X oder einem ihrer Tochterunternehmen, verbundenen Unternehmen oder Partner verbunden, von ihnen unterstützt oder gesponsert. Die auf dieser Website geäußerten Ansichten und Meinungen sind ausschließlich die des Website-Besitzers und der Mitwirkenden und stellen nicht die Ansichten oder Meinungen von Company X dar.
+                        Die auf dieser Website bereitgestellten Inhalte und Informationen dienen ausschließlich Informations- und Bildungszwecken und sind nicht mit Ludwig Stocker Hofpfisterei GmbH oder einem ihrer Tochterunternehmen, verbundenen Unternehmen oder Partner verbunden, von ihnen unterstützt oder gesponsert. Die auf dieser Website geäußerten Ansichten und Meinungen sind ausschließlich die des Website-Besitzers und der Mitwirkenden und stellen nicht die Ansichten oder Meinungen von Ludwig Stocker Hofpfisterei GmbH dar.
                         <br/><br/>
                         Alle Informationen auf dieser Website werden "wie besehen" ohne jegliche Gewährleistung jeglicher Art, ausdrücklich oder stillschweigend, zur Verfügung gestellt. Der Website-Besitzer und die Mitwirkenden geben keine Zusicherungen oder Gewährleistungen hinsichtlich der Richtigkeit, Vollständigkeit, Aktualität oder Eignung der auf dieser Website bereitgestellten Informationen.
                         <br/><br/>

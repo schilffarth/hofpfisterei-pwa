@@ -1,11 +1,9 @@
-import React from 'react';
-
-const NotFoundPage = () => {
+const CareerPage = () => {
     return (
         <div>
-            <h1>Not Found Page</h1>
+            <h1>Career Page</h1>
         </div>
     );
 };
 
-export default NotFoundPage;
+export default CareerPage;

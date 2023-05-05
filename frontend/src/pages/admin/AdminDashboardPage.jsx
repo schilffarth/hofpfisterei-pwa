@@ -12,7 +12,6 @@ import {
     ManageAccounts as ManageAccountsIcon,
     Description as DescriptionIcon,
     DynamicFeed as DynamicFeedIcon,
-    History as HistoryIcon,
 } from '@mui/icons-material';
 
 import Link from '../../components/Link/Link';
