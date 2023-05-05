@@ -24,7 +24,7 @@ router.put(
     preorderController.createPreorder
 );
 
-// Create a new preorder
+// Update a preorder
 router.post(
     '/update',
     preorderController.updatePreorder
