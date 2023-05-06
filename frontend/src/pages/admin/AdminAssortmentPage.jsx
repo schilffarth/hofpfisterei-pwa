@@ -14,18 +14,124 @@ import {
     ListItemText,
     Collapse,
     IconButton,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    ListItemIcon,
+    Chip,
 } from "@mui/material";
 import {
     Add as AddIcon,
     Save as SaveIcon,
-    Image as ImageIcon,
     ExpandMore as ExpandMoreIcon,
     ExpandLess as ExpandLessIcon,
+    Check as CheckIcon,
+    ArrowDropDown as ArrowDropDownIcon,
 } from "@mui/icons-material";
 import LoadingProgressFallback from "../../components/SuspenseFallback/LoadingProgressFallback.jsx";
 
 import api from "../../utils/api/api";
 import { showNotification } from "../../features/notificationSlice.js";
+
+const productConfig = {
+    category: [
+        'Brot',
+        'Kleingebaeck',
+        'Feingebaeck',
+        'Weissbrot',
+        'Kuchen',
+        'Landfrau',
+        'Ausschank',
+        'Handelsware',
+        'Brottopf',
+        'Imbiss',
+    ],
+    types: {
+        Brot: [
+            'Roggenbrot',
+            'Weizenbrot',
+            'Mischbrot',
+            'Vollkornbrot',
+            'Pumpernickel',
+            'Mehrkornbrot',
+            'Spezialbrot',
+        ],
+        Kleingebaeck: [
+            'Weizenkleingebaeck',
+            'Roggenkleingebaeck',
+            'Mischkleingebaeck',
+            'Vollkornkleingebaeck',
+            'Mehrkornkleingebaeck',
+            'Spezialkleingebaeck',
+        ],
+        Feingebaeck: [
+            'Hefefeingebaeck',
+            'Plundergebaeck',
+            'Dauergebaeck',
+            'Blaetterteiggebaeck',
+        ],
+        Weissbrot: [
+            'Ciabatta',
+            'Toastbrot',
+            'Baguette',
+            'Focaccia',
+            'Pide',
+            'Brioche',
+        ],
+        Kuchen: [
+            'Obstkuchen',
+            'Ruehrkuchen',
+            'Kaesekuchen',
+            'Biskuitkuchen',
+            'Sahne- / Cremetorte',
+            'Veganer Kuchen',
+        ],
+        Landfrau: [
+            'Rinderfleisch',
+            'Schweinefleisch',
+            'Putenfleisch',
+            'Gemischtes Fleisch',
+        ],
+        Ausschank: [
+            'Kaffee',
+            'Tee',
+            'Kalt',
+            'Alkohol',
+        ],
+        Handelsware: [
+            'Brotaufstrich',
+            'Molkereiprodukte',
+        ],
+        Brottopf: [
+            'Pfeiffer-Gerhards',
+            'Carstens Keramik',
+        ],
+        Imbiss: [
+            'Butterbreze',
+            'Brote',
+            'Sandwich',
+            'Salat',
+            'Muesli',
+        ],
+    },
+    allergens: [
+        'Eier',
+        'Erdnüsse',
+        'Fische',
+        'Gluten',
+        'Krebstiere',
+        'Lupinen',
+        'Milch',
+        'Schalenfrüchte',
+        'Schwefeldioxid / Sulphite',
+        'Sellerie',
+        'Senf',
+        'Sesam',
+        'Soja',
+        'Weichtiere',
+    ],
+}
 
 const AdminAssortmentPage = () => {
     const dispatch = useDispatch();
@@ -73,7 +179,7 @@ const CreateProduct = ({
     const [category, setCategory] = useState('');
     const [type, setType] = useState('');
     const [description, setDescription] = useState('');
-    const [allergens, setAllergens] = useState('');
+    const [allergens, setAllergens] = useState([]);
     const [ingredients, setIngredients] = useState('');
     const [priceKg, setPriceKg] = useState('');
     const [price, setPrice] = useState('');
@@ -82,6 +188,10 @@ const CreateProduct = ({
 
     const checkPriceRegex = (string) => {
         return /^(\d+(\.\d*)?|\.\d+)?$/.test(string);
+    }
+
+    const checkSizeRegex = (string) => {
+        return /^\d+$/.test(string);
     }
 
     const handleClick = () => {
@@ -129,11 +239,15 @@ const CreateProduct = ({
     }
 
     const handleDiscountChange = (e) => {
-        setDiscount(e.target.value);
+        if (checkSizeRegex(e.target.value)) {
+            setDiscount(e.target.value);
+        }
     }
 
     const handleSizeChange = (e) => {
-        setSize(e.target.value);
+        if (checkSizeRegex(e.target.value)) {
+            setSize(e.target.value);
+        }
     }
 
     const handleSubmit = (e) => {
@@ -145,7 +259,7 @@ const CreateProduct = ({
             category,
             type,
             description,
-            allergens: allergens.split(',').map(i => i.trim()),
+            allergens,
             ingredients: ingredients.split(',').map(i => i.trim()),
             priceKg,
             price,
@@ -183,46 +297,59 @@ const CreateProduct = ({
     }
 
     return (
-        <Box>
+        <Box className="create-product">
             {active ? (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="create-product-form">
                     <TextField
                         key="name"
                         fullWidth
                         variant="filled"
-                        margin="normal"
                         label="Verkehrsbezeichnung"
                         value={name}
                         onChange={handleNameChange}
                         autoFocus
+                        margin="none"
                     />
                     <TextField
                         key="image"
                         fullWidth
                         variant="filled"
-                        margin="normal"
                         label="Bild"
                         value={image}
                         onChange={handleImageChange}
+                        margin="none"
                     />
-                    <TextField
-                        key="category"
-                        fullWidth
-                        variant="filled"
-                        margin="normal"
-                        label="Kategorie z.B. Brot, Kleingebäck, Feingebäck, Kuchen, Ausschank, etc."
-                        value={category}
-                        onChange={handleCategoryChange}
-                    />
-                    <TextField
-                        key="type"
-                        fullWidth
-                        variant="filled"
-                        margin="normal"
-                        label="Typ z.B. Roggenbrot, Weizenkleingebäck, Hefefeingebäck, etc."
-                        value={type}
-                        onChange={handleTypeChange}
-                    />
+                    <FormControl variant="filled" fullWidth>
+                        <InputLabel id="demo-simple-select-filled-label">
+                            Kategorie
+                        </InputLabel>
+                        <Select
+                            labelId="demo-simple-select-filled-label"
+                            id="demo-simple-select-filled"
+                            value={category}
+                            onChange={handleCategoryChange}
+                        >
+                            {productConfig.category.map((category) => (
+                                <MenuItem value={category}>{category}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                    <FormControl variant="filled" fullWidth>
+                        <InputLabel id="demo-simple-select-filled-label">
+                            Typ
+                        </InputLabel>
+                        <Select
+                            labelId="demo-simple-select-filled-label"
+                            id="demo-simple-select-filled"
+                            value={type}
+                            onChange={handleTypeChange}
+                            disabled={!productConfig.types[category]}
+                        >
+                            {productConfig.types[category]?.map((type) => (
+                                <MenuItem value={type}>{type}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                     <TextField
                         key="description"
                         fullWidth
@@ -232,15 +359,45 @@ const CreateProduct = ({
                         value={description}
                         onChange={handleDescriptionChange}
                     />
-                    <TextField
-                        key="allergens"
-                        fullWidth
-                        variant="filled"
-                        margin="normal"
-                        label="Allergene (csv) z.B. 'Weizen, Sesam'"
-                        value={allergens}
-                        onChange={handleAllergensChange}
-                    />
+                    <FormControl variant="filled" fullWidth>
+                        <InputLabel id="demo-simple-select-filled-label">
+                            Allergene
+                        </InputLabel>
+                        <Select
+                            multiple
+                            labelId="demo-simple-select-filled-label"
+                            id="demo-simple-select-filled"
+                            value={allergens}
+                            onChange={handleAllergensChange}
+                            renderValue={(selected) => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                    {selected.map((value) => (
+                                        <Chip
+                                            key={value}
+                                            label={value}
+                                        />
+                                    ))}
+                                </Box>
+                            )}
+                        >
+                            {productConfig.allergens.map((allergen) => (
+                                <MenuItem
+                                    key={allergen}
+                                    value={allergen}
+                                >
+                                    {allergens.includes(allergen) && (
+                                        <ListItemIcon>
+                                            <CheckIcon />
+                                        </ListItemIcon>
+                                    )}
+                                    <ListItemText
+                                        inset={!allergens.includes(allergen)}
+                                        primary={allergen}
+                                    />
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                     <TextField
                         key="ingredients"
                         fullWidth

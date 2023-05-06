@@ -25,3 +25,7 @@ form.app-form > * {
 #app .page.preorder-page {
     max-width: 1200px;
 }
+
+.create-product .create-product-form > * {
+    margin: 0.5rem 0;
+}
